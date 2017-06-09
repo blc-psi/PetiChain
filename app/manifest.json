@@ -1,0 +1,8 @@
+{
+    "id": "web3dapp",
+    "name": "Cool Dapp",
+    "description": "This is just a toy dapp with almost no functionality",
+    "version": "0.0.1",
+    "author": "BLC-Petition-Team",
+    "iconUrl": "images/title.png"
+}
