@@ -8,10 +8,39 @@
   <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+  <script src="javascripts/app.js"></script>
+
+
+  <!-- Navigation function, (hide and shows page content) to keep it in one html -->
+  <script>
+    function navToPage(showPage) {
+      // hide previous pages
+      var pelems = document.getElementsByClassName('pages');
+      for (var i = 0; i < pelems.length; i++) {
+        pelems[i].style.display = 'none';
+      }
+      // update/remove activeMenuElement
+      var menuElements = document.getElementsByClassName("menuElement");
+      for (var i = 0; i < menuElements.length; i++) {
+        menuElements[i].classList.remove('active');
+      }
+      // display new Page
+      document.getElementById(showPage).style.display = 'block';
+
+      //set activeMenuElement
+      var activeMenuElement = showPage.replace("page", "menu");
+      document.getElementById(activeMenuElement).classList.add('active');
+
+      return;
+    }
+  </script>
+
 </head>
 
 <body>
   <!-- NavBar, add sites for deploying petition, voting, list of petitions, etc. -->
+  <!-- every nav element must have class "menuElement" and an id similar to page name except the prefix -->
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -20,14 +49,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">PetiChain</a>
+        <a class="navbar-brand" href="#" onclick="navToPage('page-Home')">PetiChain</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="sites/petitions.html">Petitions</a></li>
-          <li><a href="#">Page 2</a></li>
-          <li><a href="#">Page 3</a></li>
+          <!-- Insert new sites here -->
+          <li class="active menuElement" id="menu-Home"><a href="#" onclick="navToPage('page-Home')">Home</a></li>
+          <li class="menuElement" id="menu-petitions"><a href="#" onclick="navToPage('page-petitions')">Petitions</a></li>
+          <li class="menuElement" id="menu-page2"><a href="#">Page 2</a></li>
+          <li class="menuElement" id="menu-page3"><a href="#">Page 3</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -36,10 +66,21 @@
       </div>
     </div>
   </nav>
+  <!-- End of Navigation Menu -->
 
-  <div class="container">
-    <a href="sites/startPetition.html">Start your own Petition!</a>
+  <!-- every page needs an id "page-NAME" (fixed prefix "page-") and at least the class "pages" -->
+
+  <!-- HOME PAGE -->
+  <div id="page-Home" class="container pages">
+    <a href="#">Start your own Petition!</a>
   </div>
+
+  <!-- PETITIONS PAGE -->
+  <div id="page-petitions" style="display:none" class="container pages">
+    <h3>BLABLABLABLABLABLABLA</h3>
+  </div>
+
+
 
   <div class="container">
     <h1>A Simple Hello World Voting Application</h1>
@@ -73,7 +114,5 @@
     <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Vote</a>
   </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-<script src="app.js"></script>
 
 </html>
