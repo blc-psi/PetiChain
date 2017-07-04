@@ -14,6 +14,15 @@ latest.watch(function() {
   document.getElementById('latestBlock').innerText = latestBlock;
 });
 
+// This is how you make a function call from an onclick="createPetition()" button or whatever
 window.createPetition = function createPetition() {
   console.log("balbalbalsdblf");
+  var inpTitel = document.getElementById("crpe-titel");
+  var inpDesc = document.getElementById("crpe-description");
+  if (inpTitel.value == "") {
+    document.getElementById("crpe-output").innerText = "No Input!";
+    return false;
+  }
+  document.getElementById("crpe-output").innerText = inpTitel.value;
+  return true;
 }

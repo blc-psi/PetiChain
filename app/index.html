@@ -105,17 +105,18 @@
   <!-- CREATE PETITION PAGE -->
   <div id="page-createpetition" style="display:none" class="container pages">
     <h2>Petition erstellen</h2>
+    <strong id="crpe-output"></strong>
     <div class="form-group">
       <label>Titel:</label>
-      <input type="text" class="form-control" placeholde="Titel eingeben" id="titel">
+      <input type="text" class="form-control" placeholde="Titel eingeben" id="crpe-titel">
     </div>
     <div class="form-group">
       <label>Beschreibung:</label>
-      <textarea class="form-control" rows="6" id="description"></textarea>
+      <textarea class="form-control" rows="6" id="crpe-description"></textarea>
     </div>
     <div class="form-group">
       <label>Startzeit</label>
-      <input type="datetime-local" class="form-control" id="starttime">
+      <input type="datetime-local" class="form-control" id="crpe-starttime">
     </div>
     <button class="btn btn-default" onclick="createPetition()">Submit</button>
   </div>
