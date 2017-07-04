@@ -13,3 +13,7 @@ latest.watch(function() {
   var latestBlock = web3.eth.blockNumber;
   document.getElementById('latestBlock').innerText = latestBlock;
 });
+
+window.createPetition = function createPetition() {
+  console.log("balbalbalsdblf");
+}

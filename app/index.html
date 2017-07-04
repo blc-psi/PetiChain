@@ -55,8 +55,8 @@
           <!-- Insert new sites here -->
           <li class="active menuElement" id="menu-Home"><a href="#" onclick="navToPage('page-Home')">Home</a></li>
           <li class="menuElement" id="menu-petitions"><a href="#" onclick="navToPage('page-petitions')">Petitions</a></li>
-          <li class="menuElement" id="menu-page2"><a href="#">Page 2</a></li>
-          <li class="menuElement" id="menu-page3"><a href="#">Page 3</a></li>
+          <li class="menuElement" id="menu-createpetition"><a href="#" onclick="navToPage('page-createpetition')">Create Petitions</a></li>
+          <li class="menuElement" id="menu-admin"><a href="#" onclick="navToPage('page-admin')">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -76,46 +76,55 @@
     <h5>Latest Block Number: <strong id="latestBlock"></strong></h5>
     <h5>Latest Block Timestamp: <strong id="latestBlockTimestamp"></strong></h5>
     <h5>Latest Block Hash: <strong id="latestBlockHash"></strong></h5>
-
-    <a href="#">Start your own Petition!</a>
   </div>
 
   <!-- PETITIONS PAGE -->
   <div id="page-petitions" style="display:none" class="container pages">
-    <h3>BLABLABLABLABLABLABLA</h3>
+    <h2>Petitionen</h2>
+    <p>Here's a list of all petitions. To vote for a currently running petition click on the petition name and be forwarded to the voting process</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Titel</th>
+          <th>Beschreibung</th>
+          <th>Stimmen</th>
+        </tr>
+      </thead>
+      <tbody id="petitionList">
+        <tr>
+          <td>1</td>
+          <td>Dummy</td>
+          <td>DummyText</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="container">
-    <h1>A Simple Hello World Voting Application</h1>
-    <div id="address"></div>
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Candidate</th>
-            <th>Votes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Rama</td>
-            <td id="candidate-1"></td>
-          </tr>
-          <tr>
-            <td>Nick</td>
-            <td id="candidate-2"></td>
-          </tr>
-          <tr>
-            <td>Jose</td>
-            <td id="candidate-3"></td>
-          </tr>
-        </tbody>
-      </table>
-      <div id="msg"></div>
+  <!-- CREATE PETITION PAGE -->
+  <div id="page-createpetition" style="display:none" class="container pages">
+    <h2>Petition erstellen</h2>
+    <div class="form-group">
+      <label>Titel:</label>
+      <input type="text" class="form-control" placeholde="Titel eingeben" id="titel">
     </div>
-    <input type="text" id="candidate" />
-    <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Vote</a>
+    <div class="form-group">
+      <label>Beschreibung:</label>
+      <textarea class="form-control" rows="6" id="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Startzeit</label>
+      <input type="datetime-local" class="form-control" id="starttime">
+    </div>
+    <button class="btn btn-default" onclick="createPetition()">Submit</button>
   </div>
+
+  <!-- ADMIN PAGE -->
+  <div id="page-admin" style="display:none" class="container pages">
+    <h2>Admin Zone</h2>
+  </div>
+
 </body>
 
 
