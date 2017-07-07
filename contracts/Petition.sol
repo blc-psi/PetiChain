@@ -4,11 +4,11 @@ pragma solidity ^0.4.2;
 contract Token {
     /* array with all balances */
     mapping (address => uint256) public balanceOf;
-    
+
     function setBalance(address _to, uint256 _amount) {
         balanceOf[_to] = _amount;
     }
-    
+
     /* moves the value from the sender's account to the recipient' */
     function transfer(address _to, uint256 _value) public {
         if (balanceOf[msg.sender] < _value) { throw; } // check if sender has enough
@@ -16,7 +16,7 @@ contract Token {
         balanceOf[msg.sender] -= _value; // subtract from sender
         balanceOf[_to] += _value; // add to recipient
     }
-    
+
     /* removes one token from the address specified */
     function remove(address _from, uint256 _value) {
         if (balanceOf[_from] < _value) { throw; } // check if _from has enough
@@ -33,8 +33,8 @@ contract Petition {
     bool public status; // status of the petition (true = open, false = closed)
     uint[3] private votes; // storage for decisions (0 = yes, 1 = no, 2 = maybe)
     Token public votingToken; // token that is used for this petition
-    
-    function petition(
+
+    function Petition(
         uint32 _id,
         string _description,
         uint32 _startTime,
@@ -49,37 +49,37 @@ contract Petition {
         status = _status;
         votingToken = _votingToken;
     }
-    
+
     function setId(uint32 _id) {
         if (status) { throw; } // allow only if petition is closed
         id = _id;
     }
-    
+
     function setDescription(string _description) {
         if (status) { throw; } // allow only if petition is closed
         description = _description;
     }
-    
+
     function setStartTime(uint32 _startTime) {
         if (status) { throw; } // allow only if petition is closed
         startTime = _startTime;
     }
-    
+
     function setEndTime(uint32 _endTime) {
         if (status) { throw; } // allow only if petition is closed
         endTime = _endTime;
     }
-    
+
     function setStatus(bool _status) {
         status = _status;
     }
-    
+
     /* associates an existing token with this petition */
     function setToken(Token _votingToken) {
         if (status) { throw; } // allow only if petition is closed
         votingToken = _votingToken;
     }
-    
+
     /* count one new vote (0 = yes, 1 = no, 2 = maybe) */
     function vote(uint8 _choice) {
         if (!status) { throw; } // allow only if petition is open
@@ -92,7 +92,7 @@ contract Petition {
         }
         votes[_choice]++; // increment vote count for chosen option
     }
-    
+
     /* returns the stored decisions (0 = yes, 1 = no, 2 = maybe) */
     function evaluate() returns (uint[3]) {
         return votes;

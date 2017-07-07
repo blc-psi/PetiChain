@@ -19,5 +19,5 @@ To use the Dapp simple start parity and navigate to the dapp.
 ## Contributing
 1. See Installation
 2. Programming is done in app/ and contracts/
-3. Commit your changes: `git commit -am 'Add some feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin`
