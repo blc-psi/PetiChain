@@ -76,6 +76,8 @@
     <h5>Latest Block Number: <strong id="latestBlock"></strong></h5>
     <h5>Latest Block Timestamp: <strong id="latestBlockTimestamp"></strong></h5>
     <h5>Latest Block Hash: <strong id="latestBlockHash"></strong></h5>
+    <a href="#" onclick="testFunction()">TestFunction</a>
+
   </div>
 
   <!-- PETITIONS PAGE -->
@@ -126,7 +128,21 @@
 
   <!-- ADMIN PAGE -->
   <div id="page-admin" style="display:none" class="container pages">
-    <h2>Admin Zone</h2>
+    <h2>Ausstehende Petitionen zum deployen</h2>
+    <table class="table" id="petitionsToConfirm">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Titel</th>
+          <th>Beschreibung</th>
+          <th>Startzeit</th>
+          <th>Endzeit</th>
+          <th>Accept/Reject</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
 
 </body>
