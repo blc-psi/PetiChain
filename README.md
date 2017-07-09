@@ -7,6 +7,8 @@ git clone https://github.com/blc-psi/PetiChain.git petichain
 cd petichain
 npm i -g webpack
 ./init.sh
+webpack
+cp app/manifest.json build/
 ln -s $PWD/build/ $HOME/.local/share/io.parity.ethereum/dapps/PetiChain
 ```
 
@@ -15,6 +17,7 @@ To use the Dapp simple start parity and navigate to the dapp.
 - In case XMLHttpRequest fails to connect, use parity with this option: `--rpccorsdomain "*"`
 - changes and programming is made in app/ and contracts/
 - use `webpack` to update build-version after you saved your changes
+- with `webpack --watch` the build-version is automatically updated when a file is changed and saved
 
 ## Contributing
 1. See Installation
