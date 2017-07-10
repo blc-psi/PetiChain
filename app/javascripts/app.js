@@ -4,7 +4,7 @@ var Web3 = require('web3');
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 // for testing purpose, assume coinbase is defaulAccount
-web3.eth.defaulAccount = web3.eth.coinbase;
+// web3.eth.defaulAccount = web3.eth.coinbase;
 
 // List of contracts with its adresses
 // Must be updated with new deploys of updated contracts
@@ -20,8 +20,8 @@ var p_registerInstance = p_registerContract.at('0xA9aaa2F417bd57C87C0B751DD9fA37
 var latest = web3.eth.filter('latest')
 latest.watch(function() {
   var coinbase = web3.eth.coinbase;
-  var defaulAccount = web3.eth.defaulAccount;
-  document.getElementById('coinbase').innerText = coinbase + ' and ' + defaulAccount;
+  var defaulAccount = web3.eth.defaulAccount + " and " + coinbase;
+  document.getElementById('coinbase').innerText = defaulAccount;
   var balance = web3.eth.getBalance(coinbase);
   document.getElementById('balance').innerText = balance;
   var latestBlock = web3.eth.blockNumber;
@@ -72,6 +72,8 @@ window.confirmPetition = function confirmPetition(index) {
   var table = document.getElementById('petitionsToConfirm');
   // var pwd = prompt("Please enter password for your account " + web3.eth.defaulAccount);
   // web3.personal.unlockAccount(web3.eth.defaulAccount, pwd);
+  // -----------------------input attributes
+
   deployTokenNPetition();
   table.deleteRow(index);
   while (index < table.rows.length) {
@@ -153,6 +155,95 @@ function deployPetition(_tokenAddress) {
     }
   );
 }
+
+
+//--------------------------Account management functions
+window.login = function login() {
+  var accounts = web3.eth.accounts;
+  document.getElementById("login-error-out").innerText = "";
+  document.getElementById("login-success-out").innerText = "";
+  let accId = document.getElementById('account').value;
+  let accPwd = document.getElementById('password').value;
+  if (!web3.isAddress(accId)) {
+    document.getElementById("login-error-out").innerText = "Given input is not a valid address!";
+    return;
+  }
+  if (accounts.indexOf(accId) < 0) {
+    document.getElementById("login-error-out").innerText = "Given address is not a registered account!";
+    return;
+  }
+  if (!web3.personal.unlockAccount(accId, accPwd)) {
+    document.getElementById("login-error-out").innerText = "Wrong password!";
+    document.getElementById('password').value = "";
+    accPwd = "";
+    return;
+  } else {
+    accPwd = "";
+    document.getElementById('password').value = "";
+    web3.eth.defaulAccount = accId;
+    document.getElementById('coinbase').innerText = accId;
+    document.getElementById("menu-login").innerHTML = "<a href='#' onclick='logout()'><span class='glyphicon glyphicon-log-in'></span> Logout</a>";
+    accId = "";
+    document.getElementById("login-success-out").innerText = "Successfully logged in";
+    document.getElementById("butten-login").disabled = true;
+    navToPage("page-Home");
+  }
+}
+
+window.logout = function logout() {
+  web3.eth.defaulAccount = undefined;
+  document.getElementById('coinbase').innerText = web3.eth.defaulAccount;
+  document.getElementById("login-success-out").innerText = "";
+  document.getElementById("butten-login").disabled = false;
+  document.getElementById("signup-credential-out").innerHTML = "";
+  document.getElementById("butten-signup").disabled = false;
+  var tmpstr = '"page-login"';
+  document.getElementById("menu-login").innerHTML = "<a href='#' onclick='navToPage(" + tmpstr + ")'><span class='glyphicon glyphicon-log-in'></span> Login</a>";
+}
+
+window.signup = function signup() {
+  document.getElementById("signup-error-out").innerText = "";
+  document.getElementById("signup-success-out").innerText = "";
+  let accPwd = document.getElementById('newPassword').value;
+  let accAddr;
+  if (accPwd.length <= 0) {
+    document.getElementById("signup-error-out").innerText = "Password cannot be empty!";
+    return;
+  } else {
+    accAddr = web3.personal.newAccount(accPwd);
+    document.getElementById("newPassword").value = "";
+    accPwd="";
+    web3.eth.defaulAccount = accAddr;
+    document.getElementById("signup-credential-out").innerHTML = "The address of your new account is: <strong>" + accAddr + "</strong>";
+    document.getElementById("butten-signup").disabled = true;
+    document.getElementById('coinbase').innerText = web3.eth.defaulAccount;
+    document.getElementById("menu-login").innerHTML = "<a href='#' onclick='logout()'><span class='glyphicon glyphicon-log-in'></span> Logout</a>";
+  }
+}
+
+//------------------------Navigation Functions
+window.navToPage = function navToPage(showPage) {
+  // hide previous pages
+  var pelems = document.getElementsByClassName('pages');
+  for (var i = 0; i < pelems.length; i++) {
+    pelems[i].style.display = 'none';
+  }
+  // update/remove activeMenuElement
+  var menuElements = document.getElementsByClassName("menuElement");
+  for (var i = 0; i < menuElements.length; i++) {
+    menuElements[i].classList.remove('active');
+  }
+  // display new Page
+  document.getElementById(showPage).style.display = 'block';
+
+  //set activeMenuElement
+  var activeMenuElement = showPage.replace("page", "menu");
+  document.getElementById(activeMenuElement).classList.add('active');
+
+  return;
+}
+
+
 
 
 window.testFunction = function testFunction(){
