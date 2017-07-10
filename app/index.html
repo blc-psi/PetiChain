@@ -84,21 +84,29 @@
   <div id="page-petitions" style="display:none" class="container pages">
     <h2>Petitionen</h2>
     <p>Here's a list of all petitions. To vote for a currently running petition click on the petition name and be forwarded to the voting process</p>
-    <table class="table">
+    <table class="table" id="petitionList">
       <thead>
         <tr>
           <th>ID</th>
           <th>Titel</th>
           <th>Beschreibung</th>
+          <th>Start</th>
+          <th>Ende</th>
           <th>Stimmen</th>
+          <th>Vote</th>
         </tr>
       </thead>
-      <tbody id="petitionList">
+      <tbody>
         <tr>
           <td>1</td>
           <td>Dummy</td>
-          <td>DummyText</td>
+          <td>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</td>
           <td>100</td>
+          <td>100</td>
+          <td>yes: no: maybe:</td>
+          <td>Link</td>
         </tr>
       </tbody>
     </table>
@@ -110,7 +118,7 @@
     <p style="color:red;" id="petition-error-out" class="errMsg"></p>
     <div class="form-group">
       <label>Titel:</label>
-      <input type="text" class="form-control" id="crpe-titel">
+      <input type="text" class="form-control" id="crpe-title">
     </div>
     <div class="form-group">
       <label>Beschreibung:</label>
@@ -118,11 +126,11 @@
     </div>
     <div class="form-group">
       <label>Startzeit</label>
-      <input type="datetime-local" class="form-control" id="crpe-starttime">
+      <input type="date" class="form-control" id="crpe-starttime">
     </div>
     <div class="form-group">
       <label>Endzeit</label>
-      <input type="datetime-local" class="form-control" id="crpe-endtime">
+      <input type="date" class="form-control" id="crpe-endtime">
     </div>
     <button class="btn btn-default" onclick="createPetition()">Submit</button>
   </div>
@@ -138,7 +146,6 @@
     <table class="table" id="petitionsToConfirm">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Titel</th>
           <th>Beschreibung</th>
           <th>Startzeit</th>
