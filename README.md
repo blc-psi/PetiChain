@@ -14,7 +14,11 @@ ln -s $PWD/build/ $HOME/.local/share/io.parity.ethereum/dapps/PetiChain
 
 ## Usage
 To use the Dapp simple start parity and navigate to the dapp.
-- In case XMLHttpRequest fails to connect, use parity with this option: `--rpccorsdomain "*"`
+-Run parity with following options: `parity --chain dev --rpccorsdomain "*" --jsonrpc-apis web3,eth,net,parity,parity_accounts,rpc,personal`
+- change --chain if you want to
+- register contract must be deployed manually once in the beginning (and every time it is changed)
+<!-- - In case XMLHttpRequest fails to connect, use parity with this option: `--rpccorsdomain "*"`
+- for use of personal API use option `--jsonrpc-api personal` -->
 - changes and programming is made in app/ and contracts/
 - use `webpack` to update build-version after you saved your changes
 - with `webpack --watch` the build-version is automatically updated when a file is changed and saved
