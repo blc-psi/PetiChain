@@ -107,6 +107,7 @@
   <!-- CREATE PETITION PAGE -->
   <div id="page-createpetition" style="display:none" class="container pages">
     <h2>Petition erstellen</h2>
+    <p style="color:red;" id="petition-error-out" class="errMsg"></p>
     <div class="form-group">
       <label>Titel:</label>
       <input type="text" class="form-control" id="crpe-titel">
@@ -129,6 +130,11 @@
   <!-- ADMIN PAGE -->
   <div id="page-admin" style="display:none" class="container pages">
     <h2>Ausstehende Petitionen zum deployen</h2>
+    <div class="form-group">
+      <label>Password for authority account to deploy petition:</label>
+      <input type="password" class="form-control" id="accpetPwd">
+    </div>
+    <p style="color:red;" id="admin-error-out" class="errMsg"></p>
     <table class="table" id="petitionsToConfirm">
       <thead>
         <tr>
@@ -147,8 +153,8 @@
 
   <!-- ACCOUNT PAGE -->
   <div id="page-account" style="display:none" class="container pages">
-    <p style="color:red;" id="signup-error-out"></p>
-    <p style="color:green;" id="signup-success-out"></p>
+    <p style="color:red;" id="signup-error-out" class="errMsg"></p>
+    <p style="color:green;" id="signup-success-out" class="errMsg"></p>
     <p id="signup-credential-out"></p>
     <div class="form-group">
       <label>Password for new Account:</label>
@@ -157,11 +163,10 @@
     <button class="btn btn-default" id="butten-signup" onclick="signup()">Sign Up</button>
   </div>
 
-
   <!-- LOGIN PAGE -->
   <div id="page-login" style="display:none" class="container pages">
-    <p style="color:red;" id="login-error-out"></p>
-    <p style="color:green;" id="login-success-out"></p>
+    <p style="color:red;" id="login-error-out" class="errMsg"></p>
+    <p style="color:green;" id="login-success-out" class="errMsg"></p>
     <div class="form-group">
       <label>Account:</label>
       <input type="text" class="form-control" id="account">
