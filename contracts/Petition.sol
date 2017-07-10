@@ -27,15 +27,17 @@ contract Token {
 
 contract Petition {
     uint32 public id; // unique id of this petition
+    string public title; // short title describing the petition
     string public description; // text describing the topic of the petition
-    uint32 public startTime; // start time of the petition, use YYYYMMDDHHMMSS format
-    uint32 public endTime; // end time of the petition, use YYYYMMDDHHMMSS format
+    uint32 public startTime; // start time of the petition, UNIX time format
+    uint32 public endTime; // end time of the petition, UNIX time format
     bool public status; // status of the petition (true = open, false = closed)
     uint[3] private votes; // storage for decisions (0 = yes, 1 = no, 2 = maybe)
     Token public votingToken; // token that is used for this petition
 
     function Petition(
         uint32 _id,
+        string _title,
         string _description,
         uint32 _startTime,
         uint32 _endTime,
@@ -43,6 +45,7 @@ contract Petition {
         Token _votingToken
     ) {
         id = _id;
+        title = _title;
         description = _description;
         startTime = _startTime;
         endTime = _endTime;
@@ -53,6 +56,11 @@ contract Petition {
     function setId(uint32 _id) {
         if (status) { throw; } // allow only if petition is closed
         id = _id;
+    }
+
+    function setTitle(string _title) {
+        if (status) { throw; } // allow only if petition is closed
+        title = _title;
     }
 
     function setDescription(string _description) {
@@ -69,12 +77,13 @@ contract Petition {
         if (status) { throw; } // allow only if petition is closed
         endTime = _endTime;
     }
-
+    /*  set the status of the petition (true = open, false = closed) */
     function setStatus(bool _status) {
         status = _status;
     }
 
-    /* associates an existing token with this petition */
+    /* associates an existing token with this petition
+       takes the address of a deployed token contract as argument */
     function setToken(Token _votingToken) {
         if (status) { throw; } // allow only if petition is closed
         votingToken = _votingToken;
