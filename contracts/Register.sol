@@ -5,10 +5,17 @@ contract Register {
     
     /* array that maps IDs to addresses */
     mapping (uint32 => address) public hasAddress;
+    uint32 public count; // count all IDs
     
-    /* insert a new pair of ID and address into the register */
-    function insert(uint32 _id, address _address) {
-        if(hasAddress[_id] == 0) {
+    /* insert a new address into the register and return the ID */
+    function insert(address _address) returns (uint32) {
+        hasAddress[++count] = _address;
+        return count;
+    }
+    
+    /* replace the address for an existing ID  */
+    function overrideAddress(uint32 _id, address _address) {
+        if(_id <= count) {
             hasAddress[_id] = _address;
         } else {
             throw;
@@ -22,10 +29,6 @@ contract Register {
     
     /* check whether an ID is already registered */
     function check(uint32 _id) public returns (bool contained){
-        if(hasAddress[_id] == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return (_id <= count);
     }
 }
