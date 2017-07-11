@@ -8,7 +8,7 @@ contract Token {
     uint256 public numTokens;
     
     /* initialises all addresses to the given amount of tokens */
-    function Token(address[] _address, uint256 _amount) {
+    function init(address[] _address, uint256 _amount) {
         uint i = 0;
         while(i < _address.length) {
             balanceOf[_address[i]] = _amount;
