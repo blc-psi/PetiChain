@@ -9,8 +9,8 @@ contract Register {
     
     /* insert a new address into the register and return the ID */
     function insert(address _address) returns (uint32) {
-        hasAddress[++count] = _address;
-        return count;
+        hasAddress[count] = _address;
+        return count++;
     }
     
     /* replace the address for an existing ID  */
