@@ -4,9 +4,23 @@ pragma solidity ^0.4.2;
 contract Token {
     /* array with all balances */
     mapping (address => uint256) public balanceOf;
-
+    /* counts total number of tokens. CAUTION, CAN OVERFLOW! */
+    uint256 public numTokens;
+    
+    /* initialises all addresses to the given amount of tokens */
+    function Token(address[] _address, uint256 _amount) {
+        uint i = 0;
+        while(i < _address.length) {
+            balanceOf[_address[i]] = _amount;
+            i++;
+        }
+        numTokens += _amount * _address.length;
+    }
+    
     function setBalance(address _to, uint256 _amount) {
+        uint256 t = balanceOf[_to];
         balanceOf[_to] = _amount;
+        numTokens = numTokens - t + _amount;
     }
 
     /* moves the value from the sender's account to the recipient' */
@@ -21,6 +35,7 @@ contract Token {
     function remove(address _from, uint256 _value) {
         if (balanceOf[_from] < _value) { throw; } // check if _from has enough
         balanceOf[_from] -= _value; // subtract from sender
+        numTokens -= _value;
     }
 }
 
@@ -31,6 +46,8 @@ contract Petition {
     string public description; // text describing the topic of the petition
     uint32 public startTime; // start time of the petition, UNIX time format
     uint32 public endTime; // end time of the petition, UNIX time format
+    string public startTimeTest; // start time of the petition, test variable
+    string public endTimeTest; // start time of the petition, test variable
     bool public status; // status of the petition (true = open, false = closed)
     uint[3] private votes; // storage for decisions (0 = yes, 1 = no, 2 = maybe)
     Token public votingToken; // token that is used for this petition
@@ -77,6 +94,17 @@ contract Petition {
         if (status) { throw; } // allow only if petition is closed
         endTime = _endTime;
     }
+    
+    function setStartTimeTest(string _startTimeTest) {
+        if (status) { throw; } // allow only if petition is closed
+        startTimeTest = _startTimeTest;
+    }
+
+    function setEndTimeTest(string _endTimeTest) {
+        if (status) { throw; } // allow only if petition is closed
+        endTimeTest = _endTimeTest;
+    }
+    
     /*  set the status of the petition (true = open, false = closed) */
     function setStatus(bool _status) {
         status = _status;
