@@ -154,7 +154,8 @@ window.confirmPetition = function confirmPetition(index) {
   var title = row.cells[0].innerText;
   var description = row.cells[1].innerText;
   var startTime = new BigNumber(Date.parse(row.cells[2].innerText));
-  // console.log(startTime.toNumber());
+  console.log(startTime);
+  console.log(row.cells[2].innerText);
   var endTime = new BigNumber(Date.parse(row.cells[3].innerText));
   // console.log(Date.parse(endTime));
   var status = true;
@@ -166,7 +167,7 @@ window.confirmPetition = function confirmPetition(index) {
   deployTokenNPetition(pwd, id, title, description, startTime, endTime, status);
   table.deleteRow(index);
   while (index < table.rows.length) {
-    table.rows[index].cells[4].innerHTML = "<a href='#' onclick='confirmPetition(" + index + ")'>Accept</a> <a href='#' onclick='rejectPetition(" + index + ")'>Reject</a>";
+    table.rows[index].cells[4].innerHTML = '<button type="button" class="btn btn-primary btn-sm" onclick="confirmPetition(' + index + ')">Accept</button> <button type="button" class="btn btn-primary btn-sm" onclick="rejectPetition(' + index + ')">Reject</button>';
     index += 1;
   }
 }
@@ -220,9 +221,11 @@ function deployPetition(_pwd, _id, _title, _description, _startTime, _endTime, _
           web3.personal.unlockAccount(authAddr, _pwd);
           pet.setDescription(_description, {from: authAddr});
           web3.personal.unlockAccount(authAddr, _pwd);
-          pet.setStartTime(_startTime.toNumber(), {from: authAddr});
+          console.log(_startTime);
+          console.log(_startTime.toString());
+          pet.setStartTime(_startTime.toString(), {from: authAddr});
           web3.personal.unlockAccount(authAddr, _pwd);
-          pet.setEndTime(_endTime.toNumber(), {from: authAddr});
+          pet.setEndTime(_endTime.toString(), {from: authAddr});
           web3.personal.unlockAccount(authAddr, _pwd);
           pet.setStatus(_status, {from: authAddr});
 
