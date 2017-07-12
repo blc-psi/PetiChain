@@ -14,7 +14,7 @@ ln -s $PWD/build/ $HOME/.local/share/io.parity.ethereum/dapps/PetiChain
 
 ## Usage
 To use the Dapp simple start parity and navigate to the dapp.
--Run parity with following options: `parity --chain dev --rpccorsdomain "*" --jsonrpc-apis web3,eth,net,parity,parity_accounts,rpc,personal`
+- Run parity with following options: `parity --chain dev --rpccorsdomain "*" --jsonrpc-apis web3,eth,net,parity,parity_accounts,rpc,personal`
 - change --chain if you want to
 - register contract must be deployed manually once in the beginning (and every time it is changed)
 <!-- - In case XMLHttpRequest fails to connect, use parity with this option: `--rpccorsdomain "*"`
@@ -28,3 +28,6 @@ To use the Dapp simple start parity and navigate to the dapp.
 2. Programming is done in app/ and contracts/
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin`
+
+
+parseInt(pet.evaluate.call()[0])

@@ -10,31 +10,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
   <script src="app.js" type="text/javascript"></script>
-
-  <!-- Navigation function, (hide and shows page content) to keep it in one html -->
-  <script type="text/javascript">
-    // function navToPage(showPage) {
-    //   // hide previous pages
-    //   var pelems = document.getElementsByClassName('pages');
-    //   for (var i = 0; i < pelems.length; i++) {
-    //     pelems[i].style.display = 'none';
-    //   }
-    //   // update/remove activeMenuElement
-    //   var menuElements = document.getElementsByClassName("menuElement");
-    //   for (var i = 0; i < menuElements.length; i++) {
-    //     menuElements[i].classList.remove('active');
-    //   }
-    //   // display new Page
-    //   document.getElementById(showPage).style.display = 'block';
-    //
-    //   //set activeMenuElement
-    //   var activeMenuElement = showPage.replace("page", "menu");
-    //   document.getElementById(activeMenuElement).classList.add('active');
-    //
-    //   return;
-    // }
-  </script>
-
 </head>
 
 <body>
@@ -77,7 +52,6 @@
     <h5>Latest Block Timestamp: <strong id="latestBlockTimestamp"></strong></h5>
     <h5>Latest Block Hash: <strong id="latestBlockHash"></strong></h5>
     <a href="#" onclick="testFunction()">TestFunction</a>
-
   </div>
 
   <!-- PETITIONS PAGE -->
@@ -111,6 +85,26 @@
       </tbody>
     </table>
   </div>
+
+
+  <!-- VOTING PAGE -->
+  <div id="page-voting" style="display:none" class="container pages">
+    <h5>Id: <strong id="voting_id"></strong></h5>
+    <h5>Title: <strong id="voting_title"></strong></h5>
+    <h5>Description: <strong id="voting_desc"></strong></h5>
+    <h5>StartTime: <strong id="voting_st"></strong></h5>
+    <h5>EndTime: <strong id="voting_et"></strong></h5>
+    <h5>Votes: <strong id="voting_votes"></strong><br /></h5>
+    <div class="form-group">
+      <h5>Your Account: <strong id="voting_account"></strong></h5>
+      <label>Your Password:</label>
+      <input type="password" class="form-control" id="voting_pwd">
+      <label>Number of votes you want to give:</label>
+      <input type="number" class="form-control" id="voting_num">
+    </div>
+    <div id="voting_button"></div>
+  </div>
+
 
   <!-- CREATE PETITION PAGE -->
   <div id="page-createpetition" style="display:none" class="container pages">
