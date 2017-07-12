@@ -2,11 +2,14 @@ import { default as Web3} from 'web3';
 
 var BigNumber = require('bignumber.js');
 
+// To make app work on Ethereum, web3 object is used (communicates to local node through RPC calls; works with any Ethereum node exposing an RPC layer)
+// create an instance of web3 using the HTTP provider
 var Web3 = require('web3');
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 // Authority Address:
 var authAddr = '0x002dec2D1E355a105bb450273D3Da39d65CFE884';
+// set the default account
 web3.eth.defaulAccount = authAddr;
 
 // List of contracts with its adresses
@@ -24,13 +27,17 @@ var tokenBytecode = '0x6060604052341561000f57600080fd5b5b6105ab8061001f600039600
 
 
 // These are automated functions which are executed everytime the state of the blockchain changes
+// setup a filter for new blocks
 var latest = web3.eth.filter('latest')
 latest.watch(function() {
+  // The coinbase address of the client
   var coinbase = web3.eth.coinbase;
   var defaulAccount = web3.eth.defaulAccount + " and " + coinbase;
   document.getElementById('coinbase').innerText = defaulAccount;
+  // check account balance
   var balance = web3.eth.getBalance(coinbase);
   document.getElementById('balance').innerText = balance;
+  // number of the most recent block
   var latestBlock = web3.eth.blockNumber;
   document.getElementById('latestBlock').innerText = latestBlock;
 
