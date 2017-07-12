@@ -46,11 +46,10 @@
 
   <!-- HOME PAGE -->
   <div id="page-Home" style="display:block" class="container pages">
-    <h5>Coinbase Address: <strong id="coinbase"></strong></h5>
+    <h5>Your address: <strong id="coinbase"></strong></h5>
     <h5>Balance: <strong id="balance"></strong></h5>
     <h5>Latest Block Number: <strong id="latestBlock"></strong></h5>
-    <h5>Latest Block Timestamp: <strong id="latestBlockTimestamp"></strong></h5>
-    <h5>Latest Block Hash: <strong id="latestBlockHash"></strong></h5>
+
     <a href="#" onclick="testFunction()">TestFunction</a>
   </div>
 
@@ -67,7 +66,7 @@
           <th>Start</th>
           <th>Ende</th>
           <th>Stimmen</th>
-          <th>Vote</th>
+          <th>Remaining</th>
         </tr>
       </thead>
       <tbody>
@@ -89,6 +88,7 @@
 
   <!-- VOTING PAGE -->
   <div id="page-voting" style="display:none" class="container pages">
+    <p style="color:red;" id="vote-error-out" class="errMsg"></p>
     <h5>Id: <strong id="voting_id"></strong></h5>
     <h5>Title: <strong id="voting_title"></strong></h5>
     <h5>Description: <strong id="voting_desc"></strong></h5>
@@ -97,12 +97,25 @@
     <h5>Votes: <strong id="voting_votes"></strong><br /></h5>
     <div class="form-group">
       <h5>Your Account: <strong id="voting_account"></strong></h5>
-      <label>Your Password:</label>
-      <input type="password" class="form-control" id="voting_pwd">
+      <h5>Your remaining votes: <strong id="voting_tokens"></strong></h5>
+      <label>Your Password: </label>
+      <input type="password" class="form-control inpElem" id="voting_pwd">
       <label>Number of votes you want to give:</label>
-      <input type="number" class="form-control" id="voting_num">
+      <input type="number" class="form-control inpElem" id="voting_num">
     </div>
     <div id="voting_button"></div>
+
+    <div class="form-group">
+      <h5>Transfer your remaining votes to another account</h5>
+      <label>Recipient: </label>
+      <input type="text" class="form-control inpElem" id="transfer_recipient">
+      <label>Your password:</label>
+      <input type="password" class="form-control inpElem" id="transfer_pwd">
+      <label>Number of votes you want to transfer: </label>
+      <input type="number" class="form-control inpElem" id="transfer_num">
+    </div>
+    <div id="transfer_button"></div>
+
   </div>
 
 
@@ -126,6 +139,10 @@
       <label>Endzeit</label>
       <input type="date" class="form-control" id="crpe-endtime">
     </div>
+    <div class="form-group">
+      <label>Votes per person</label>
+      <input type="number" class="form-control" id="crpe-num">
+    </div>
     <button class="btn btn-default" onclick="createPetition()">Submit</button>
   </div>
 
@@ -134,7 +151,7 @@
     <h2>Ausstehende Petitionen zum deployen</h2>
     <div class="form-group">
       <label>Password for authority account to deploy petition:</label>
-      <input type="password" class="form-control" id="accpetPwd">
+      <input type="password" class="form-control inpElem" id="accpetPwd">
     </div>
     <p style="color:red;" id="admin-error-out" class="errMsg"></p>
     <table class="table" id="petitionsToConfirm">
@@ -144,6 +161,7 @@
           <th>Beschreibung</th>
           <th>Startzeit</th>
           <th>Endzeit</th>
+          <th>TokenZahl</th>
           <th>Accept/Reject</th>
         </tr>
       </thead>
@@ -159,7 +177,7 @@
     <p id="signup-credential-out"></p>
     <div class="form-group">
       <label>Password for new Account:</label>
-      <input type="password" class="form-control" id="newPassword">
+      <input type="password" class="form-control inpElem" id="newPassword">
     </div>
     <button class="btn btn-default" id="butten-signup" onclick="signup()">Sign Up</button>
   </div>
@@ -170,11 +188,11 @@
     <p style="color:green;" id="login-success-out" class="errMsg"></p>
     <div class="form-group">
       <label>Account:</label>
-      <input type="text" class="form-control" id="account">
+      <input type="text" class="form-control inpElem" id="account">
     </div>
     <div class="form-group">
       <label>Password:</label>
-      <input type="password" class="form-control" id="password">
+      <input type="password" class="form-control inpElem" id="password">
     </div>
     <button class="btn btn-default" id="butten-login" onclick="login()">Login</button>
   </div>
