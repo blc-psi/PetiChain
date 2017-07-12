@@ -39,7 +39,7 @@ latest.watch(function() {
 
 //-----------------Petitions List-------------------
 var listCount = 0;
-function listPetitions() {
+window.listPetitions = function listPetitions() {
   var i = 1; //to skip table header
   var table = document.getElementById('petitionList');
   var token;
@@ -467,7 +467,7 @@ window.navToPage = function navToPage(showPage) {
   }
   var inpelems = document.getElementsByClassName("inpElem");
   for (var i = 0; i < inpelems.length; i++) {
-    inpelems[i].value = "";
+
   }
 
   // display new Page
