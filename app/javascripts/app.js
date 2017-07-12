@@ -51,18 +51,18 @@ function listPetitions() {
     var petaddr = petreg.hasAddress(listCount);
     if (web3.isAddress(petaddr) && petaddr != 0 ) {
       var pet = petCon.at(petaddr);
-      var id = listCount;
+      var id = listCount; // unique id of petition
       // console.log(pet.title());
-      var title = pet.title();
-      var description = pet.description();
-      var st = new Date(parseInt(pet.startTimeTest()));
+      var title = pet.title(); // short title describing the petition
+      var description = pet.description(); // text describing the topic of the petition
+      var st = new Date(parseInt(pet.startTimeTest())); // start time of the petition, UNIX time format
       var startTime = st;
-      var et = new Date(parseInt(pet.endTimeTest()));
+      var et = new Date(parseInt(pet.endTimeTest())); // end time of the petition, UNIX time format
       var endTime = et;
       var v_yes = parseInt(pet.evaluate.call()[0]);
       var v_no = parseInt(pet.evaluate.call()[1]);
       var v_maybe = parseInt(pet.evaluate.call()[2]);
-      // var votes = [v_yes, v_no, v_maybe];
+      // var votes = [v_yes, v_no, v_maybe]; // storage for decisions (yes, no, maybe)
 
       var table = document.getElementById('petitionList');
       var row = table.insertRow(1);
