@@ -34,7 +34,7 @@ latest.watch(function() {
   var latestBlock = web3.eth.blockNumber;
   document.getElementById('latestBlock').innerText = latestBlock;
 
-  // listPetitions();
+  listPetitions();
 });
 
 //-----------------Petitions List-------------------
@@ -52,12 +52,13 @@ window.listPetitions = function listPetitions() {
 
     let remaining = parseInt(token.balanceOf(web3.eth.defaultAccount));
 
-    let v_yes = parseInt(pet.evaluate.call()[0]);
-    let v_no = parseInt(pet.evaluate.call()[1]);
-    let v_maybe = parseInt(pet.evaluate.call()[2]);
+    // let v_yes = parseInt(pet.evaluate.call()[0]);
+    // let v_no = parseInt(pet.evaluate.call()[1]);
+    // let v_maybe = parseInt(pet.evaluate.call()[2]);
 
-    table.rows[i].cells[5].innerHTML = "<p>yes: " + v_yes + "<br>no: " + v_no + "<br>maybe: " + v_maybe + "</p>";
-    table.rows[i].cells[6].innerHTML = '<button type="button" class="btn btn-primary btn-sm" onclick="goToVoting(' + id + ')">Votes: ' + remaining + '</button>';
+    // table.rows[i].cells[5].innerHTML = "<p>yes: " + v_yes + "<br>no: " + v_no + "<br>maybe: " + v_maybe + "</p>";
+    // table.rows[i].cells[6].innerHTML = '<button type="button" class="btn btn-primary btn-sm" onclick="goToVoting(' + id + ')">Votes: ' + remaining + '</button>';
+    table.rows[i].cells[5].innerHTML = '<button type="button" class="btn btn-primary btn-sm" onclick="goToVoting(' + id + ')">Votes: ' + remaining + '</button>';
     i += 1;
   }
   //Update list with new petitions
@@ -67,10 +68,9 @@ window.listPetitions = function listPetitions() {
     token = tokenCon.at(pet.votingToken());
     let remaining = parseInt(token.balanceOf(web3.eth.defaultAccount));
 
-    var id = listCount;
-    var v_yes = parseInt(pet.evaluate.call()[0]);
-    var v_no = parseInt(pet.evaluate.call()[1]);
-    var v_maybe = parseInt(pet.evaluate.call()[2]);
+    // var v_yes = parseInt(pet.evaluate.call()[0]);
+    // var v_no = parseInt(pet.evaluate.call()[1]);
+    // var v_maybe = parseInt(pet.evaluate.call()[2]);
 
     var row = table.insertRow(1);
     var c0 = row.insertCell(0);
@@ -78,15 +78,16 @@ window.listPetitions = function listPetitions() {
     var c2 = row.insertCell(2);
     var c3 = row.insertCell(3);
     var c4 = row.insertCell(4);
-    var c5 = row.insertCell(5);
-    var c6 = row.insertCell(6);
+    // var c5 = row.insertCell(5);
+    // var c6 = row.insertCell(6);
+    var c6 = row.insertCell(5);
     c0.innerText = listCount;
     c1.innerText = pet.title();
     c2.innerText = pet.description();
     c3.innerText = new Date(parseInt(pet.startTimeTest()));
     c4.innerText = new Date(parseInt(pet.endTimeTest()));
-    c5.innerHTML = "<p>yes: " + v_yes + "<br>no: " + v_no + "<br>maybe: " + v_maybe + "</p>";
-    c6.innerHTML = '<button type="button" class="btn btn-primary btn-sm" onclick="goToVoting(' + id + ')">Votes: ' + remaining + '</button>';
+    // c5.innerHTML = "<p>yes: " + v_yes + "<br>no: " + v_no + "<br>maybe: " + v_maybe + "</p>";
+    c6.innerHTML = '<button type="button" class="btn btn-primary btn-sm" onclick="goToVoting(' + listCount + ')">Votes: ' + remaining + '</button>';
     listCount += 1;
   }
 }
@@ -108,8 +109,8 @@ window.goToVoting = function goToVoting(id) {
   document.getElementById("voting_votes").innerHTML = "<p>yes: " + v_yes + "<br>no: " + v_no + "<br>maybe: " + v_maybe + "</p>";
 
   document.getElementById("voting_account").innerText = web3.eth.defaultAccount;
-  var maxVotes = parseInt(token.balanceOf(web3.eth.defaultAccount));
-  document.getElementById("voting_tokens").innerText = maxVotes;
+  var remaining = parseInt(token.balanceOf(web3.eth.defaultAccount));
+  document.getElementById("voting_tokens").innerText = remaining;
   var voteButton = '<div class="btn-group">'
   voteButton += '<button type="button" class="btn btn-primary" onclick="vote(' + id + ', 0,)">Yes</button>';
   voteButton += '<button type="button" class="btn btn-primary" onclick="vote(' + id + ', 1,)">No</button>';
@@ -199,6 +200,7 @@ window.transfer = function transfer(id) {
 
   goToVoting(id);
 }
+
 
 //----------------Petition Deployement-----------------
 //First stage of deploying the petition is deploying the according tokenCon
@@ -407,6 +409,7 @@ window.login = function login() {
     document.getElementById('account').value = "";
     document.getElementById('password').value = "";
     web3.eth.defaultAccount = accId;
+    listPetitions();
     document.getElementById('coinbase').innerText = accId;
     document.getElementById("menu-login").innerHTML = "<a href='#' onclick='logout()'><span class='glyphicon glyphicon-log-in'></span> Logout</a>";
     accId = "";
@@ -418,6 +421,7 @@ window.login = function login() {
 
 window.logout = function logout() {
   web3.eth.defaultAccount = undefined;
+  listPetitions();
   document.getElementById('coinbase').innerText = web3.eth.defaultAccount;
   document.getElementById("login-success-out").innerText = "";
   document.getElementById("butten-login").disabled = false;
@@ -426,6 +430,7 @@ window.logout = function logout() {
   document.getElementById('admin-error-out').innerText = "";
   var tmpstr = '"page-login"';
   document.getElementById("menu-login").innerHTML = "<a href='#' onclick='navToPage(" + tmpstr + ")'><span class='glyphicon glyphicon-log-in'></span> Login</a>";
+  navToPage("page-Home");
 }
 
 window.signup = function signup() {
@@ -441,6 +446,7 @@ window.signup = function signup() {
     document.getElementById("newPassword").value = "";
     accPwd="";
     web3.eth.defaultAccount = accAddr;
+    listPetitions();
     document.getElementById("signup-credential-out").innerHTML = "The address of your new account is: <strong>" + accAddr + "</strong>";
     document.getElementById("butten-signup").disabled = true;
     document.getElementById('coinbase').innerText = web3.eth.defaultAccount;
@@ -480,11 +486,4 @@ window.navToPage = function navToPage(showPage) {
   }
 
   return;
-}
-
-
-
-
-window.testFunction = function testFunction(){
-  listPetitions();
 }
