@@ -27,7 +27,7 @@ var tokenBytecode = '0x6060604052341561000f57600080fd5b5b6105ab8061001f600039600
 var latest = web3.eth.filter('latest')
 latest.watch(function() {
   var coinbase = web3.eth.coinbase;
-  var defaulAccount = web3.eth.defaultAccount + " and " + coinbase;
+  var defaulAccount = web3.eth.defaultAccount;
   document.getElementById('coinbase').innerText = defaulAccount;
   var balance = web3.eth.getBalance(coinbase);
   document.getElementById('balance').innerText = balance;
