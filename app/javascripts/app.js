@@ -27,8 +27,8 @@ var tokenBytecode = '0x6060604052341561000f57600080fd5b5b6105ab8061001f600039600
 var latest = web3.eth.filter('latest')
 latest.watch(function() {
   var coinbase = web3.eth.coinbase;
-  var defaulAccount = web3.eth.defaultAccount;
-  document.getElementById('coinbase').innerText = defaulAccount;
+  var defaultAccount = web3.eth.defaultAccount;
+  document.getElementById('coinbase').innerText = defaultAccount;
   var balance = web3.eth.getBalance(coinbase);
   document.getElementById('balance').innerText = balance;
   var latestBlock = web3.eth.blockNumber;
@@ -265,6 +265,11 @@ window.createPetition = function createPetition() {
 window.rejectPetition = function rejectPetition(index) {
   if (web3.toAscii(web3.eth.defaultAccount) != web3.toAscii(authAddr)) {
     document.getElementById('admin-error-out').innerText = "You're not allowed to accept or reject pending Petitions";
+    return;
+  }
+  let pwd = document.getElementById('accpetPwd').value
+  if (!web3.personal.unlockAccount(authAddr, pwd)) {
+    document.getElementById('admin-error-out').innerText = "Wrong password!";
     return;
   }
   var table = document.getElementById('petitionsToConfirm');
