@@ -14,10 +14,11 @@ ln -s $PWD/build/ $HOME/.local/share/io.parity.ethereum/dapps/PetiChain
 
 ## Usage
 Before using the Dapp for the first time or on a different chain you need to check and maybe change a few parameters.
-1. Check if a petition register has already been uploaded to the chain you are using and if its address matches the parameter `var petregAddress = '...';` (line 10) in `app/javascripts/app.js`
-    - if the petition register is not present or you want to use a new one, you have to deploy it manually by using its bytecode and ABI. You can compile the Register.sol code yourself or paste the code in here (https://remix.ethereum.org/).
-    - set the `petregAddress` according to the address you get when deployed and mined
-2. Set the authority address, which represents the organization which can actually confirm and deploy the petitions given by random users. You can use any account you have access to and change `var authAddr = '...';` accordingly.
+1. Check if a control contract and the according registers have already been deployed to the chain you are using and if its address matches the parameter `var controlAddr = '...';` (line 9) in `app/javascripts/app.js`
+    - if the control contract is not present or you want to use a new one and reset the petition-, user- and authority register, you can use the following command inside the directory of the git download: `node newRegAndControl.js *accountAddress* *password*`. After running the script, you will get the contract address which you need to set the parameter to. The specified account will also be the first authority account.
+    - if there is an error with deploying the contracts automatically, you can deploy them manually via parity or some other way. You can find the necessary ABIs and Bytecodes for the register and control contracts in the upper section of `newRegAndControl.js`
+    - set the `controlAddr` according to the address you get when deployed and mined and add the address to the authority register
+2. You will need at least one account which is registered in the authority register to be able to deploy petitions. Ask the owner of the specified control contract to add your account to the list. If you created your own authority register, your account is added automatically. Any other account must be inserted via the `insert(*address*)` function of the authority contract by someone who's already registered.
 3. Be aware that you need enough ether/gas to deploy the petitions (and petition register). Also every use needs sufficient gas to vote for a petition.
 
 Run parity with following options:
